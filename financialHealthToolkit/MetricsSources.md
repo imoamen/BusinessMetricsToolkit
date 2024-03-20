@@ -11,7 +11,7 @@
 * https://www.investopedia.com/articles/active-trading/082615/key-financial-ratios-analyze-hospitality-industry.asp
 * https://insights.ehotelier.com/insights/2022/06/07/the-top-10-hotel-performance-metrics/
 ### Agriculture KPIs
-* Sources across the web :)
+* Sources across the web :) (trust me)
 ### Service Sector KPIs
 * https://birdviewpsa.com/blog/kpis-for-service-firms-in-2023/
 * https://klient.com/blog/top-kpis-examples-for-professional-services-firms/
