@@ -1,4 +1,4 @@
-### Module Documentation (genAi generated)
+### Module Documentation (genAi generated documention)
 #### Purpose:
 This module provides a class structure for analyzing company metrics and calculating key performance indicators (KPIs) across various sectors.
 
