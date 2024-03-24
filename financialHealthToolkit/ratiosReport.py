@@ -37,7 +37,7 @@ def series_ratios_trade(in_obj):
 # hotel methods methods to series function
 def series_ratios_hotel(in_obj):
     list_ratios = [
-        cmh.date_record
+        in_obj.date_record
         , cmh.occ_rate(in_obj), cmh.ave_daily_rate(in_obj), cmh.rev_per_room_aval(in_obj), cmh.GOPPAR(in_obj), cmh.rev_par(in_obj)
         , cmh.current_ratio(in_obj), cmh.quick_ratio(in_obj), cmh.cash_ratio(in_obj)
         , cmh.total_debt_ratio(in_obj), cmh.dept_equity_ratio(in_obj), cmh.equity_multi(in_obj), cmh.tie(in_obj), cmh.cash_cov_ratio(in_obj)
@@ -50,7 +50,7 @@ def series_ratios_hotel(in_obj):
 # farms
 def series_ratios_agriculture(in_obj):
     list_ratios = [
-        cma.date_record
+        in_obj.date_record
         , cma.land_yield(in_obj), cma.livestock_yield(in_obj)
         , cma.current_ratio(in_obj), cma.quick_ratio(in_obj), cma.cash_ratio(in_obj)
         , cma.total_debt_ratio(in_obj), cma.dept_equity_ratio(in_obj), cma.equity_multi(in_obj), cma.tie(in_obj), cma.cash_cov_ratio(in_obj)
@@ -63,7 +63,7 @@ def series_ratios_agriculture(in_obj):
 # service partnership
 def series_ratios_service_sector(in_obj):
     list_ratios = [
-        cms.date_record
+        in_obj.date_record
         , cms.profit_marg_partner(), cms.fee_rev_consultant_ratio()
         , cms.current_ratio(in_obj), cms.quick_ratio(in_obj), cms.cash_ratio(in_obj)
         , cms.total_debt_ratio(in_obj), cms.dept_equity_ratio(in_obj), cms.equity_multi(in_obj), cms.tie(in_obj), cms.cash_cov_ratio(in_obj)
@@ -76,7 +76,7 @@ def series_ratios_service_sector(in_obj):
 # namufacturing co
 def series_ratios_manuf(in_obj):
     list_ratios = [
-        cmm.date_record
+        in_obj.date_record
         , cmm.inv_trnovr(), cmm.manuf_cost_exp_ratio(), cmm.mtrils_cost_exp_ratio()
         , cmm.current_ratio(in_obj), cmm.quick_ratio(in_obj), cmm.cash_ratio(in_obj)
         , cmm.total_debt_ratio(in_obj), cmm.dept_equity_ratio(in_obj), cmm.equity_multi(in_obj), cmm.tie(in_obj), cmm.cash_cov_ratio(in_obj)
@@ -89,7 +89,7 @@ def series_ratios_manuf(in_obj):
 # mining co
 def series_ratios_mining_forestry(in_obj):
     list_ratios = [
-        cmmf.date_record
+        in_obj.date_record
         , cmmf.total_debt_ratio(), cmmf.equity_multi(), cmmf.total_asset_trnovr(), cmmf.return_assets(), cmmf.cash_cov_ratio()
         , cmmf.current_ratio(in_obj), cmmf.quick_ratio(in_obj), cmmf.cash_ratio(in_obj)
         , cmmf.total_debt_ratio(in_obj), cmmf.dept_equity_ratio(in_obj), cmmf.equity_multi(in_obj), cmmf.tie(in_obj), cmmf.cash_cov_ratio(in_obj)
