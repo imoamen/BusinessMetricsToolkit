@@ -1,7 +1,7 @@
 # Financial Ratios display Tool
 
 ## Description
-This repository contains a Python tool for analyzing financial ratios of different types of companies. The tool is designed to calculate and present various financial ratios and metrics commonly used in financial analysis, tailored to specific industries such as hotels, trade companies, agriculture, service sectors, manufacturing companies, mining, and forestry.
+The tool is designed to calculate and present various financial ratios and metrics commonly used in financial analysis, tailored to specific industries such as hotels, trade companies, agriculture, service sectors, manufacturing companies, mining, and forestry.
 
 ## Features
 - Provides a flexible class structure representing different types of companies, each with specific attributes and methods for calculating financial ratios.
