@@ -7,7 +7,7 @@ from companyMod import (
     Agriculture as cma, 
     ServiceSector as cms, 
     Manuf as cmm, 
-    mining_forestry as cmmf
+    MiningForestry as cmmf
 )
 '''
 the code is self explanatory, I only commented once for one company type, it goes the same:
