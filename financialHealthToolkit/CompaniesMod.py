@@ -335,7 +335,7 @@ class Manuf(Company):
     
 
 # Mining and forestry
-class mining_forestry(Company):
+class MiningForestry(Company):
     def __init__(
         self, accu_depl, depl_exp
         , cash, account_receivables, inventory, current_assets 
