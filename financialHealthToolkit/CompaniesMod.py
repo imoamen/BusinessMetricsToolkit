@@ -1,3 +1,4 @@
+import pandas as pd
 # Creating main company
 class Company:
     def __init__(
@@ -117,7 +118,7 @@ class Company:
     def wages_rev_ratio(self):
         return self.wages_exp / self.total_rev
     
-#Hotel
+#Hotel subclass
 class Hotel(Company):
     def __init__(
         self, room_num_aval, room_rev, room_num_occ, room_num_sold
@@ -148,33 +149,59 @@ class Hotel(Company):
         )
         
     # Other metrics methods
-    # gross operation profit calculation 
+    # - gross operation profit calculation 
     def GOP(self):
         return self.total_rev - self.operating_exp
     
-    # Occupation rate
+    # - Occupation rate
     def occ_rate(self):
         return self.room_num_occ / self.room_num_aval
     
     # Specific Financial Ratios methods
-    # Average daily rate
+    # - Average daily rate
     def ave_daily_rate(self):
         return self.room_rev / self.room_num_occ
     
-    # Revenue per available rooms
+    # - Revenue per available rooms
     def rev_per_room_aval(self):
         return self.room_rev / self.room_num_aval
     
-    # Gross Operating Profit per Available Room
+    # - Gross Operating Profit per Available Room
     def GOPPAR(self):
         return self.GOP() / self.room_num_aval
     
-    # Revenue Per Available Rooms
+    # - Revenue Per Available Rooms
     def rev_par(self):
         return self.ave_daily_rate() * self.occ_rate()
-    # Pandas 
-  
-#trade
+
+    # Initiate a dataframe for instance, to be used for 
+    def create_df(self):
+        # Gathering data in single list
+        list_ratios = [
+            self.date_record,
+            self.GOPPAR(), self.rev_per_room_aval(), self.rev_par(), # specific methods
+            # default methods
+            self.current_ratio(), self.quick_ratio(), self.cash_ratio(), # liquidity ratios
+            self.total_debt_ratio(), self.dept_equity_ratio(), self.equity_multi(), self.tie(), self.cash_cov_ratio(), # financial leverage ratios
+            self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr(), # turnover ratios 
+            self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios
+        ]
+        # Creating a list of column names
+        columns = [
+            'Period'
+            , 'GOPPAR', 'Revenue per Available Room', 'Revenue Per Available Rooms' # hotel specific ratios
+            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
+            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
+            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+        ]  
+        # Creating dataframe from values under respective columns
+        df = pd.DataFrame([list_ratios], columns=columns)
+        # Setting Period date as index
+        df.set_index('Period', inplace=True)
+        return df
+    
+# Trade companies subclass
 class Trade(Company):
     def __init__(
         self, cogs, ave_inv
@@ -207,12 +234,38 @@ class Trade(Company):
     def inv_trnovr(self):
         return self.cogs / self.ave_inv
     
-        # Days’ sales in inventory 
+    # Days’ sales in inventory 
     def days_sales_inv_trnovr(self):
         return 365 / self.inv_trnovr()
+    
+    # Initiate a dataframe for instance, to be used for 
+    def create_df(self):
+        # Gathering data in single list
+        list_ratios = [
+                    self.date_record,
+                    self.inv_trnovr(), self.days_sales_inv_trnovr() # special methods
+                    # default methods
+                    , self.current_ratio(), self.quick_ratio(), self.cash_ratio() # liquidity ratios
+                    , self.total_debt_ratio(), self.dept_equity_ratio(), self.equity_multi(), self.tie(), self.cash_cov_ratio() # finacial leverage ratios
+                    , self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr() # turnover ratios 
+                    , self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios        ]
+        ]
+        # Creating a list of column names
+        columns = [
+            'Period'
+            , 'Inventory Turnover', 'Days\' sales inventory turnover'
+            , 'Current Ratio', 'Quick ratio', 'Cash Ratio'
+            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage'
+            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover'
+            , 'Profti Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue'
+        ]  
+        # Creating dataframe from values under respective columns
+        df = pd.DataFrame([list_ratios], columns = columns)
+        # Setting Period date as index
+        df.set_index('Period', inplace=True)
+        return df  
         
-
-#Agriculture
+#Agriculture subclass
 class Agriculture(Company):
     def __init__(
         self, total_farm_area, total_farm_rev, total_num_stock, total_stock_rev
@@ -251,8 +304,34 @@ class Agriculture(Company):
     def livestock_yield(self):
         return self.total_stock_rev / self.total_num_stock
 
+    # initiate a dataframe for instance, to be used for 
+    def create_df(self):
+        # Gathering data in single list
+        list_ratios = [
+            self.date_record,
+            self.land_yield(), self.livestock_yield(), # specific methods
+            # default methods
+            self.current_ratio(), self.quick_ratio(), self.cash_ratio(), # liquidity ratios
+            self.total_debt_ratio(), self.dept_equity_ratio(), self.equity_multi(), self.tie(), self.cash_cov_ratio(), # financial leverage ratios
+            self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr(), # turnover ratios 
+            self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios
+        ]
+        # Creating a list of column names
+        columns = [
+            'Period'
+            , 'Land Yield', 'Livestock Yield' # agriculture specific ratios
+            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
+            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
+            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+        ]  
+        # Creating dataframe from values under respective columns
+        df = pd.DataFrame([list_ratios], columns=columns)
+        # Setting Period date as index
+        df.set_index('Period', inplace=True)
+        return df
 
-# Service businesses
+# Service companies subclass
 class ServiceSector(Company):
     def __init__(
         self, total_fee_rev, equity_partner_num, consultant_num
@@ -289,9 +368,35 @@ class ServiceSector(Company):
     # fees revenue per consultant or lawyer
     def fee_rev_consultant_ratio(self):
         return self.total_fee_rev / self.consultant_num
+    
+    # Initiate a dataframe for instance, to be used for 
+    def create_df(self):
+        # Gathering data in single list
+        list_ratios = [
+            self.date_record,
+            self.profit_marg_partner(), self.fee_rev_consultant_ratio(), # specific methods
+            # default methods
+            self.current_ratio(), self.quick_ratio(), self.cash_ratio(), # liquidity ratios
+            self.total_debt_ratio(), self.dept_equity_ratio(), self.equity_multi(), self.tie(), self.cash_cov_ratio(), # financial leverage ratios
+            self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr(), # turnover ratios 
+            self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios
+        ]
+        # Creating a list of column names
+        columns = [
+            'Period'
+            , 'Profit Margin per Partner', 'Fee Revenue per Consultant' # service sector specific ratios
+            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
+            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
+            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+        ]  
+        # Creating dataframe from values under respective columns
+        df = pd.DataFrame([list_ratios], columns=columns)
+        # Setting Period date as index
+        df.set_index('Period', inplace=True)
+        return df
 
-
-# Manufacturing companies
+# Manufacturing companies subclass
 class Manuf(Company):
     def __init__(
         self, mtrils_cost, cogs, manuf_cost
@@ -332,9 +437,36 @@ class Manuf(Company):
     # Materials costs to expenses ratio
     def mtrils_cost_exp_ratio(self):
         return self.mtrils_cost / self.total_exp
-    
 
-# Mining and forestry
+    # Create DataFrame
+    # initiate a dataframe for instance, to be used for 
+    def create_df(self):
+        # Gathering data in single list
+        list_ratios = [
+            self.date_record,
+            self.inv_trnovr(), self.manuf_cost_exp_ratio(), self.mtrils_cost_exp_ratio(), # specific methods
+            # default methods
+            self.current_ratio(), self.quick_ratio(), self.cash_ratio(), # liquidity ratios
+            self.total_debt_ratio(), self.dept_equity_ratio(), self.equity_multi(), self.tie(), self.cash_cov_ratio(), # financial leverage ratios
+            self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr(), # turnover ratios 
+            self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios
+        ]
+        # Creating a list of column names
+        columns = [
+            'Period'
+            , 'Inventory Turnover', 'Manufacturing Cost to Expenses Ratio', 'Materials Cost to Expenses Ratio' # manufacturing specific ratios
+            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
+            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
+            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+        ]  
+        # Creating dataframe from values under respective columns
+        df = pd.DataFrame([list_ratios], columns=columns)
+        # Setting Period date as index
+        df.set_index('Period', inplace=True)
+        return df    
+
+# Mining and forestry companies subclass
 class MiningForestry(Company):
     def __init__(
         self, accu_depl, depl_exp
@@ -389,3 +521,29 @@ class MiningForestry(Company):
     # -- Cash Coverage Ratios
     def cash_cov_ratio(self):
         return (self.ebit + self.depr_exp + self.depl_exp) / self.interest_exp
+    
+    # initiate a dataframe for instance to be used for adding functionality in functionsMod
+    def create_df(self):
+        # Gathering data in single list
+        list_ratios = [
+            self.date_record,
+            # adjusted financial leverage ratios
+            self.total_debt_ratio(), self.equity_multi(), self.total_asset_trnovr(), self.return_assets(), self.cash_cov_ratio(),
+            # inherited methods from base class
+            self.current_ratio(), self.quick_ratio(), self.cash_ratio(), # liquidity ratios
+            self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr(), # turnover ratios
+            self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios]
+        ]
+        # Creating a list of column names
+        columns = [
+            'Period'
+            , 'Total Debt Ratio', 'Equity Multiplier', 'Total Assets Turnover', 'Return on Assets', 'Cash Coverage' # adjusted financial leverage ratios
+            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
+            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+        ]  
+        # Creating dataframe from values under respective columns
+        df = pd.DataFrame([list_ratios], columns=columns)
+        # Setting Period date as index
+        df.set_index('Period', inplace=True)
+        return df
