@@ -1,4 +1,5 @@
 import pandas as pd
+
 # Creating main company
 class Company:
     def __init__(
@@ -63,7 +64,7 @@ class Company:
         except ZeroDivisionError:
             return 0
 
-    # -- Quick ratio
+    # -- Quick Ratio
     def quick_ratio(self):
         try:
             return (self.current_assets - self.inventory) / self.current_lia
@@ -252,10 +253,10 @@ class Hotel(Company):
         columns = [
             'Period'
             , 'GOPPAR', 'Revenue per Available Room', 'Revenue Per Available Rooms' # hotel specific ratios
-            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
-            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
-            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
-            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+            , 'Current Ratio', 'Quick Ratio', 'Cash Ratio' # liquidity ratios
+            , 'Total Debt Ratio', 'Debt to Equity Ratio', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
+            , 'Receivables Turnover', 'Days Sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue Ratio' # profitability ratios
         ]  
         # Creating dataframe from values under respective columns
         df = pd.DataFrame([list_ratios], columns=columns)
@@ -323,11 +324,11 @@ class Trade(Company):
         # Creating a list of column names
         columns = [
             'Period'
-            , 'Inventory Turnover', 'Days\' sales inventory turnover'
-            , 'Current Ratio', 'Quick ratio', 'Cash Ratio'
-            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage'
-            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover'
-            , 'Profti Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue'
+            , 'Inventory Turnover', 'Days Sales Inventory Turnover'
+            , 'Current Ratio', 'Quick Ratio', 'Cash Ratio'
+            , 'Total Debt Ratio', 'Debt to Equity Ratio', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage'
+            , 'Receivables Turnover', 'Days Sales Receivables Turnover', 'Total Assets Turnover'
+            , 'Profti Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue Ratio'
         ]  
         # Creating dataframe from values under respective columns
         df = pd.DataFrame([list_ratios], columns = columns)
@@ -395,10 +396,10 @@ class Agriculture(Company):
         columns = [
             'Period'
             , 'Land Yield', 'Livestock Yield' # agriculture specific ratios
-            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
-            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
-            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
-            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+            , 'Current Ratio', 'Quick Ratio', 'Cash Ratio' # liquidity ratios
+            , 'Total Debt Ratio', 'Debt to Equity Ratio', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
+            , 'Receivables Turnover', 'Days Sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue Ratio' # profitability ratios
         ]  
         # Creating dataframe from values under respective columns
         df = pd.DataFrame([list_ratios], columns=columns)
@@ -464,10 +465,10 @@ class ServiceSector(Company):
         columns = [
             'Period'
             , 'Profit Margin per Partner', 'Fee Revenue per Consultant' # service sector specific ratios
-            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
-            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
-            , 'Receivables Turnover', 'Days sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
-            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+            , 'Current Ratio', 'Quick Ratio', 'Cash Ratio' # liquidity ratios
+            , 'Total Debt Ratio', 'Debt to Equity Ratio', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
+            , 'Receivables Turnover', 'Days Sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue Ratio' # profitability ratios
         ]  
         # Creating dataframe from values under respective columns
         df = pd.DataFrame([list_ratios], columns=columns)
@@ -540,10 +541,10 @@ class Manuf(Company):
         columns = [
             'Period'
             , 'Inventory Turnover', 'Manufacturing Cost to Expenses Ratio', 'Materials Cost to Expenses Ratio' # manufacturing specific ratios
-            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
-            , 'Total Debt Ratio', 'Debt to Equity', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
-            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
-            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+            , 'Current Ratio', 'Quick Ratio', 'Cash Ratio' # liquidity ratios
+            , 'Total Debt Ratio', 'Debt to Equity Ratio', 'Equity Multiplier', 'Times Interest Earned', 'Cash Coverage' # financial leverage ratios
+            , 'Receivables Turnover', 'Days Sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue Ratio' # profitability ratios
         ]  
         # Creating dataframe from values under respective columns
         df = pd.DataFrame([list_ratios], columns=columns)
@@ -631,9 +632,9 @@ class MiningForestry(Company):
         columns = [
             'Period'
             , 'Total Debt Ratio', 'Equity Multiplier', 'Total Assets Turnover', 'Return on Assets', 'Cash Coverage' # adjusted financial leverage ratios
-            , 'Current Ratio', 'Quick ratio', 'Cash Ratio' # liquidity ratios
-            , 'Receivables Turnover', 'Days\' sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
-            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue' # profitability ratios
+            , 'Current Ratio', 'Quick Ratio', 'Cash Ratio' # liquidity ratios
+            , 'Receivables Turnover', 'Days Sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
+            , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue Ratio' # profitability ratios
         ]  
         # Creating dataframe from values under respective columns
         df = pd.DataFrame([list_ratios], columns=columns)
