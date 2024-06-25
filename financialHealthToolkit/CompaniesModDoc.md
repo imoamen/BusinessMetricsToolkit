@@ -187,6 +187,3 @@ trade_df = trade.create_df()
 company_period1 = cm.Hotel(...)
 company_period2 = cm.Hotel(...)
 ...
-
-# - Concatenate the financial data from different periods
-combined_df = multi_period_table(company1, company2, ...)
