@@ -1,10 +1,6 @@
 # Sources for financial ratios and some KPIs
 ### Financial ratios
-* Essentials of corporate finance / Stephen A. Ross, Massachusetts 
- Institute of Technology, Randolph W. Westerfield, University of Southern 
- California, Bradford D. Jordan, University of Kentucky.
- Tenth edition. | New York, NY : McGraw-Hill Education, [2020] | 
- Includes index.
+* Ross, S. A., Westerfield, R., & Jordan, B. D. (2023). Essentials of corporate finance. McGraw Hill LLC. 
 ### hotel KPIs
 * https://guidingmetrics.com/content/hotel-industrys-14-most-critical-metrics/
 * https://www.mews.com/en/blog/hotel-industry-kpis
