@@ -1,6 +1,6 @@
 # Financial Ratios Analysis
 
-This module contains a collection of functions that operate on company instances from the `companyMod` module. These functions vary in usage and are sometimes interdependent; some manipulate DataFrames while others create plots, etc.
+This module contains a collection of functions that operate on company instances from the `companyMod` module. These functions vary in usage and are sometimes interdependent; e.g. manipulate DataFrames.
 
 ## Dependencies
 
