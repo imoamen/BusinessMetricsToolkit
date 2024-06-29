@@ -127,12 +127,3 @@ def liquidity_analysis(*in_objs):
     crrnt_ratio_health(*in_objs)
     crrnt_ratio_time_analysis(*in_objs)
     csh_ratio_time_analysis(*in_objs)
-
-
-
-
-
-          
-
-
-
