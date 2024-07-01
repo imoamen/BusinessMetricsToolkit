@@ -54,7 +54,6 @@ class Company:
         return self.current_lia + self.noncurrent_lia
 
     # Financial Ratios methods
-    # all methods return method that are inhreited by subclasses
     # add validation test to makes sure no division by zero
     # - Liquidity ratio calculation
     # -- Current Ratio
