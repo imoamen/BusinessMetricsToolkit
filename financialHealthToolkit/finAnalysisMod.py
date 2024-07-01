@@ -1,7 +1,7 @@
 import functionsMod as fm 
 import numpy as np 
 # this file performes diagnosic financial analysis on instances of `cm.company`, the asses liquidity, profitability, leverage, etc..., 
-# the diagnosis itself is based on the sources mentioned in `metricsSources.md` in the `financialHeathToolkit`,
+# the diagnosis itself is based on the sources mentioned in README file in the `financialHeathToolkit`,
 # the functions provide diagnostics based on the data from different periods
 # all functions here expect instances of `cm.company`'s subclasses.
 # The `numpy` library for arrays for there speed and efficiency and the ability to perform complex mathimatical operations not available in standard py data structures
