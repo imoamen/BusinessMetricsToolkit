@@ -235,8 +235,11 @@ class Hotel(Company):
             return self.ave_daily_rate() * self.occ_rate()
         except ZeroDivisionError:
             return 0
-
-    # Initiate a dataframe for instance, to be used for 
+    '''
+    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
+    where different instances are concatnated, 
+    for now we just need to make sure a method is there that can produce a df for each instance 
+    '''
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
@@ -308,7 +311,11 @@ class Trade(Company):
         except ZeroDivisionError:
             return 0
         
-    # Initiate a dataframe for instance, to be used for 
+    '''
+    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
+    where different instances are concatnated, 
+    for now we just need to make sure a method is there that can produce a df for each instance 
+    '''
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
@@ -379,7 +386,11 @@ class Agriculture(Company):
         except ZeroDivisionError:
             return 0
         
-    # initiate a dataframe for instance, to be used for 
+    '''
+    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
+    where different instances are concatnated, 
+    for now we just need to make sure a method is there that can produce a df for each instance 
+    '''
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
@@ -435,7 +446,11 @@ class ServiceSector(Company):
         , total_rev, sales_rev , total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
     
-    # Specific Financial Ratios methods
+    '''
+    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
+    where different instances are concatnated, 
+    for now we just need to make sure a method is there that can produce a df for each instance 
+    '''
     # profit margin per partner
     def profit_marg_partner(self):
         try:
@@ -524,7 +539,11 @@ class Manuf(Company):
         except ZeroDivisionError:
             return 0
     # Create DataFrame
-    # initiate a dataframe for instance, to be used for 
+    '''
+    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
+    where different instances are concatnated, 
+    for now we just need to make sure a method is there that can produce a df for each instance 
+    '''
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
@@ -615,7 +634,11 @@ class MiningForestry(Company):
             return (self.ebit + self.depr_exp + self.depl_exp) / self.interest_exp
         except ZeroDivisionError:
             return 0
-    # initiate a dataframe for instance to be used for adding functionality in functionsMod
+    '''
+    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
+    where different instances are concatnated, 
+    for now we just need to make sure a method is there that can produce a df for each instance 
+    '''
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
