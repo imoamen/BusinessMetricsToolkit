@@ -104,115 +104,147 @@ def plt_single_ratio(*in_obj):
 
 # plots a specific category of ratios chosen by the user
 def plt_ratios(*in_objs):
+    # liquidity ratios
+    def plt_liq_ratios(*in_objs):
+        ratios_df = fm.multi_period_table(*in_objs)
+        # plot color, dimensions, and axes
+        plt.style.use(['seaborn-v0_8'])
+        plt.figure(figsize=(16,8))
+        plt.xlabel('Period')
+        plt.ylabel('Ratio')
+        plt.title('Liquidity ratios over time')
+        # creating lines for each graph, they are assigned to variables for futhur use in 'legend()'
+        cr_time = plt.plot(ratios_df.index, ratios_df['Current Ratio'],'bo-')
+        qr_time = plt.plot(ratios_df.index, ratios_df['Quick Ratio'], 'co-')
+        cshr_time = plt.plot(ratios_df.index, ratios_df['Cash Ratio'], 'go-')
+        # assigning patch colors to variables for fithur use in 'legend()'
+        blgnd = mpatches.Patch(color='blue', label='Current Ratio')
+        clgnd = mpatches.Patch(color='cyan', label='Quick Ratio')
+        glgnd = mpatches.Patch(color='green', label='Cash Ratio')
+        plt.legend([cr_time, qr_time, cshr_time], handles = [blgnd, clgnd, glgnd], bbox_to_anchor=(.675, -0.1), ncol=3, borderaxespad=0.) 
+        plt.show() # command to show the plot
+
+    # financial leverage ratios
+    def plt_finlev_ratios(*in_objs):
+        ratios_df = fm.multi_period_table(*in_objs)
+        # plot color, dimensions, and axes
+        plt.style.use(['seaborn-v0_8'])
+        plt.figure(figsize=(16,8))
+        plt.xlabel('period')
+        plt.ylabel('Ratio')
+        plt.title('Financial leverage over time')
+        # creating lines for each graph, they are assigned to variables for futhur use in 'legend()'
+        tdr_time = plt.plot(ratios_df.index, ratios_df['Total Debt Ratio'],'ro-')
+        de_time = plt.plot(ratios_df.index, ratios_df['Debt to Equity Ratio'], 'go-')
+        em_time = plt.plot(ratios_df.index, ratios_df['Equity Multiplier'], 'bo-')
+        tie_time = plt.plot(ratios_df.index, ratios_df['Times Interest Earned'], 'co-')
+        cshcov_time = plt.plot(ratios_df.index, ratios_df['Cash Coverage'], 'yo-')
+        # assigning patch colors to variables for fithur use in 'legend()'
+        rlgnd = mpatches.Patch(color='red', label='Total Debt Ratio')
+        blgnd = mpatches.Patch(color='blue', label='Debt to Equity Ratio')
+        glgnd = mpatches.Patch(color='green', label='Equity Multiplier')
+        clgnd = mpatches.Patch(color='cyan', label='Times Interest Earned')
+        ylgnd = mpatches.Patch(color='yellow', label='Cash Coverage')
+        plt.legend([tdr_time, de_time, em_time, tie_time, cshcov_time], handles = [rlgnd,  blgnd, glgnd, clgnd, ylgnd],  bbox_to_anchor=(.85, -0.1), ncol=5, borderaxespad=0.) 
+        plt.show() # command to show the plot
+    # turnover ratios
+    def plt_trnvr_ratios(*in_objs):
+        ratios_df = fm.multi_period_table(*in_objs)
+        # plot color, dimensions, and axes
+        plt.style.use(['seaborn-v0_8'])
+        plt.figure(figsize=(16,8))
+        plt.xlabel('period')
+        plt.ylabel('Ratio')
+        plt.title('Turnover ratios over time')
+        # creating lines for each graph, they are assigned to variables for futhur use in 'legend()'
+        rtrn_time = plt.plot(ratios_df.index, ratios_df['Receivables Turnover'],'ro-')
+        dystrn_time = plt.plot(ratios_df.index, ratios_df['Days Sales Receivables Turnover'], 'go-')
+        tatrn_time = plt.plot(ratios_df.index, ratios_df['Total Assets Turnover'], 'bo-')
+        # assigning patch colors to variables for fithur use in 'legend()'
+        rlgnd = mpatches.Patch(color='red', label='Receivables Turnover')
+        blgnd = mpatches.Patch(color='blue', label='Days Sales Receivables Turnover')
+        glgnd = mpatches.Patch(color='green', label='Total Assets Turnover')
+        plt.legend([rtrn_time, dystrn_time, tatrn_time], handles = [rlgnd,  blgnd, glgnd], bbox_to_anchor=(.675, -0.1), ncol=3, borderaxespad=0.) 
+        plt.show() # command to show the plot
+    # profitability ratios
+    def plt_prft_ratios(*in_objs):
+        ratios_df = fm.multi_period_table(*in_objs)
+        # plot color, dimensions, and axes
+        plt.style.use(['seaborn-v0_8'])
+        plt.figure(figsize=(16,8))
+        plt.xlabel('period')
+        plt.ylabel('Ratio')
+        plt.title('Profitabilty ratios over time')
+        # creating lines for each graph, they are assigned to variables for futhur use in 'legend()'
+        pm_time = plt.plot(ratios_df.index, ratios_df['Profit Margin'],'ro-')
+        ra_time = plt.plot(ratios_df.index, ratios_df['Return on Assets'], 'go-')
+        re_time = plt.plot(ratios_df.index, ratios_df['Return on Equity'], 'bo-')
+        prev_time = plt.plot(ratios_df.index, ratios_df['Payroll(wages) to Revenue Ratio'], 'co-')
+        # assigning patch colors to variables for fithur use in 'legend()'
+        rlgnd = mpatches.Patch(color='red', label='Profit Margin')
+        blgnd = mpatches.Patch(color='blue', label='Return on Assets')
+        glgnd = mpatches.Patch(color='green', label='Return on Equity')
+        clgnd = mpatches.Patch(color='cyan', label='Payroll(wages) to Revenue Ratio')
+        plt.legend([pm_time, ra_time, re_time, prev_time], handles = [rlgnd,  blgnd, glgnd, clgnd], bbox_to_anchor=(.8, -0.1), ncol=4, borderaxespad=0.) 
+        plt.show() # command to show the plot
+    
     pltin_done = False
-    while not pltin_done:
+    while not pltin_done:    
         try:
             # shows the user the categories for them to choose from
-            print('Categories of financial ratios are:\n - "liquidity ratios" (or type : "l")\n - "financial leverage" (or type : "f")\n - "turnover ratios" (or type : "t")\n - "profitabilty ratios" (or type : "p") ')
-            ratio_cat_toplot = str(input('Which of the the categories do you want to plot? --> '))
-            # assigning the dataframe of ratios to 'ratios_df'
-            ratios_df = fm.multi_period_table(*in_objs)
+            ratio_plted = str(input("""For Liquidity Ratios type: 'liquidity' or 'l'
+            \nFor Financial Leverage Ratios type: 'financial leverage' or 'f'
+            \nFor Turnover ratios type: 'turnover' or  't'
+            \nFor Profitability Ratios type: 'profitability' or 'p'
+            \n-----------------------------------------------------
+            \nWhich of those ratios do you want to plot?: """))
+            # Assign the standard answer to a list to be used in the next condition 
+            lst_stndrd_ans = ['liquidity', 'l', 'financial leverage', 'f', 'turnover' , 't', 'profitability' ,'p']
+            if ratio_plted not in lst_stndrd_ans:
+                # executes if the user enters an invalid string answer 
+                print("""Received non-standard input input!,
+                    \nFor Liquidity Ratios type: 'liquidity' or 'l'
+                    \nFor Financial Leverage Ratios type: 'financial leverage' or 'f'
+                    \nFor Turnover ratios type: 'turnover' or  't'
+                    \nFor Profitability Ratios type: 'profitability' or 'p'
+                    """)
             # user chooses liquidity ratios
-            if ratio_cat_toplot in ['liquidity ratios', 'l']:
-                # plot dimensions and axes
-                plt.figure(figsize=(16,8))
-                plt.style.use(['dark_background'])
-                plt.xlabel('period')
-                plt.ylabel('Ratio')
-                plt.title('Liquidity ratios over time')
-                # creating lines for each graph, they are assigned to variables for futhur use in 'legend()'
-                cr_time = plt.plot(ratios_df.index, ratios_df['Current Ratio'],'bo-')
-                qr_time = plt.plot(ratios_df.index, ratios_df['Quick Ratio'], 'co-')
-                cshr_time = plt.plot(ratios_df.index, ratios_df['Cash Ratio'], 'wo-')
-                # assigning patch colors to variables for fithur use in 'legend()'
-                blgnd = mpatches.Patch(color='blue', label='Current Ratio')
-                clgnd = mpatches.Patch(color='cyan', label='Quick Ratio')
-                wlgnd = mpatches.Patch(color='white', label='Cash Ratio')
-                plt.legend([cr_time, qr_time, cshr_time], handles = [blgnd, clgnd, wlgnd], bbox_to_anchor=(.675, -0.1), ncol=3, borderaxespad=0.) 
-                plt.show() # command to show the plot
+            elif ratio_plted in ['liquidity', 'l']:
+                plt_liq_ratios(*in_objs)
             # user chooses financial leverage ratios
-            elif ratio_cat_toplot in ['financial leverage', 'f']:
-                # plot dimensions and axes
-                plt.figure(figsize=(16,8))
-                plt.xlabel('period')
-                plt.ylabel('Ratio')
-                plt.title('Financial leverage over time')
-                # creating lines for each graph, they are assigned to variables for futhur use in 'legend()'
-                tdr_time = plt.plot(ratios_df.index, ratios_df['Total Debt Ratio'],'ro-')
-                de_time = plt.plot(ratios_df.index, ratios_df['Debt to Equity Ratio'], 'go-')
-                em_time = plt.plot(ratios_df.index, ratios_df['Equity Multiplier'], 'bo-')
-                tie_time = plt.plot(ratios_df.index, ratios_df['Times Interest Earned'], 'co-')
-                cshcov_time = plt.plot(ratios_df.index, ratios_df['Cash Coverage'], 'yo-')
-                # assigning patch colors to variables for fithur use in 'legend()'
-                rlgnd = mpatches.Patch(color='red', label='Total Debt Ratio')
-                blgnd = mpatches.Patch(color='blue', label='Debt to Equity Ratio')
-                glgnd = mpatches.Patch(color='green', label='Equity Multiplier')
-                clgnd = mpatches.Patch(color='cyan', label='Times Interest Earned')
-                ylgnd = mpatches.Patch(color='yellow', label='Cash Coverage')
-                plt.legend([tdr_time, de_time, em_time, tie_time, cshcov_time], handles = [rlgnd,  blgnd, glgnd, clgnd, ylgnd],  bbox_to_anchor=(.85, -0.1), ncol=5, borderaxespad=0.) 
-                plt.show() # command to show the plot
+            elif ratio_plted in ['financial leverage', 'f']:
+                plt_finlev_ratios(*in_objs)
             # user chooses turnover ratios
-            elif ratio_cat_toplot in ['turnover ratios', 't']:
-                # plot dimensions and axes
-                plt.figure(figsize=(16,8))
-                plt.xlabel('period')
-                plt.ylabel('Ratio')
-                plt.title('Turnover ratios over time')
-                # creating lines for each graph, they are assigned to variables for futhur use in 'legend()'
-                rtrn_time = plt.plot(ratios_df.index, ratios_df['Receivables Turnover'],'ro-')
-                dystrn_time = plt.plot(ratios_df.index, ratios_df['Days Sales Receivables Turnover'], 'go-')
-                tatrn_time = plt.plot(ratios_df.index, ratios_df['Total Assets Turnover'], 'bo-')
-                # assigning patch colors to variables for fithur use in 'legend()'
-                rlgnd = mpatches.Patch(color='red', label='Receivables Turnover')
-                blgnd = mpatches.Patch(color='blue', label='Days Sales Receivables Turnover')
-                glgnd = mpatches.Patch(color='green', label='Total Assets Turnover')
-                plt.legend([rtrn_time, dystrn_time, tatrn_time], handles = [rlgnd,  blgnd, glgnd], bbox_to_anchor=(.675, -0.1), ncol=3, borderaxespad=0.) 
-                plt.show() # command to show the plot
+            elif ratio_plted in ['turnover' , 't']:
+                plt_trnvr_ratios(*in_objs)
             # user chooses profitability ratios
-            elif ratio_cat_toplot in ['profitability ratios', 'p']:
-                # plot dimensions and axes
-                plt.figure(figsize=(16,8))
-                plt.xlabel('period')
-                plt.ylabel('Ratio')
-                plt.title('Profitabilty ratios over time')
-                # creating lines for each graph, they are assigned to variables for futhur use in 'legend()'
-                pm_time = plt.plot(ratios_df.index, ratios_df['Profit Margin'],'ro-')
-                ra_time = plt.plot(ratios_df.index, ratios_df['Return on Assets'], 'go-')
-                re_time = plt.plot(ratios_df.index, ratios_df['Return on Equity'], 'bo-')
-                prev_time = plt.plot(ratios_df.index, ratios_df['Payroll(wages) to Revenue Ratio'], 'co-')
-                # assigning patch colors to variables for fithur use in 'legend()'
-                rlgnd = mpatches.Patch(color='red', label='Profit Margin')
-                blgnd = mpatches.Patch(color='blue', label='Return on Assets')
-                glgnd = mpatches.Patch(color='green', label='Return on Equity')
-                clgnd = mpatches.Patch(color='cyan', label='Payroll(wages) to Revenue Ratio')
-                plt.legend([pm_time, ra_time, re_time, prev_time], handles = [rlgnd,  blgnd, glgnd, clgnd], bbox_to_anchor=(.8, -0.1), ncol=4, borderaxespad=0.) 
-                plt.show() # command to show the plot
-            # executes if the user enters an invalid string answer 
-            else: 
-                 print("Input invalid, please enter one of these categories: \n -'liquidity ratios' or 'l'\n - 'financial leverage', 'f'\n - 'turnover ratios', 't'\n - 'profitability ratios', 'p'")
+            elif ratio_plted in ['profitability' ,'p']:
+                plt_prft_ratios(*in_objs)
+            # no else statment needed, 
+                # if the answer was a string but not standard the if statement caught it,
+                # if it was another data type the except clause caught it.
         # executes if the user enters a non-string value for the question that asks them "what plot to d you want"
         except ValueError:
-            print("Input in valid, please enter one of these categories: \n -'liquidity ratios' or 'l'\n - 'financial leverage', 'f'\n - 'turnover ratios', 't'\n - 'profitability ratios', 'p'")
-        # Does the user want another plot made?
-            while True:
-                try:
-                    pltin_done_var = input('Do you want to make another plot? y/n: --> ').strip().lower()
-                    # If yes, then break this loop and don't change the value of 'pltin_done'
-                    if pltin_done_var == 'y':
-                        break
-                    # if no, break the loop and change the value of 'pltin_done' to true to exit the outer loop and end the program
-                    elif pltin_done_var == 'n':
-                        pltin_done = True
-                        break
-                    # executes it the user enters an invalid string answer, here the loop isn't broken, rather it reprompts the user and asks them for a valid answer
-                    else:
-                        print("""Please enter a valid answer:
-                        \n 'y' if you want to make another plot
-                        \n 'n' if you want to end the program
-                        """)
-                # executes if the user enters an invalid non-string answer, here the loop isn't broken, rather it reprompt the user and asks them for a valid answer
-                except ValueError:
-                    print("""Please enter a valid answer:
-                    \n 'y' if you want to make another plot
-                    \n 'n' if you want to end the program
+            print("""Received invalid input!,
+                    \nFor Liquidity Ratios type: 'liquidity' or 'l'
+                    \nFor Financial Leverage Ratios type: 'financial leverage' or 'f'
+                    \nFor Turnover ratios type: 'turnover' or  't'
+                    \nFor Profitability Ratios type: 'profitability' or 'p'
                     """)
+        # Does the user want another plot made?
+        while True:
+            try:
+                ans = str(input('Do you want another plot made? y/n: ')).lower().strip()
+                # If yes, then break this loop and don't change the value of 'pltin_done'
+                if 'y' == ans:
+                    break
+                # if no, break the loop and change the value of 'pltin_done' to true to exit the outer loop and end the program
+                elif 'n' == ans:
+                    pltin_done = True
+                    break
+                # executes it the user enters an invalid string answer, here the loop isn't broken, rather it reprompts the user and asks them for a valid answer
+                else:
+                    print('Non-standard input entered, please say "y" if you want another plot,\n if not please say "n"')
+            # executes if the user enters an invalid non-string answer, here the loop isn't broken, rather it reprompt the user and asks them for a valid answer
+            except ValueError:
+                print('Invalid input entered, please say "y" if you want another plot,\n if not please say "n"')
