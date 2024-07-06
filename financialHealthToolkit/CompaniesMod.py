@@ -8,7 +8,7 @@ class Company:
             , intangible_assets = 0, longterm_investments = 0
             , current_lia = 0, noncurrent_lia = 0
             , owners_equity = 0, net_income = 0, ebit = 0
-            , total_rev = 0, sales_rev  = 0, total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0
+            , total_rev = 0, sales_rev = 0, credit_sales_rev = 0,  total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0
             ):
         
         # Assigning values to attributes
@@ -38,6 +38,7 @@ class Company:
         # Income statement 
         self.total_rev = total_rev
         self.sales_rev = sales_rev
+        self.credit_sales_rev = credit_sales_rev
         self.total_exp = total_exp
         self.operating_exp = operating_exp
         self.interest_exp = interest_exp
@@ -54,6 +55,7 @@ class Company:
         return self.current_lia + self.noncurrent_lia
 
     # Financial Ratios methods
+    # all methods return method that are inhreited by subclasses
     # add validation test to makes sure no division by zero
     # - Liquidity ratio calculation
     # -- Current Ratio
@@ -117,7 +119,7 @@ class Company:
     # -- Receivables turnover
     def rece_trnovr(self):
         try:
-            return self.sales_rev / self.account_receivables
+            return self.credit_sales_rev / self.account_receivables
         except ZeroDivisionError:
             return 0
 
@@ -172,7 +174,7 @@ class Hotel(Company):
         intangible_assets = 0, longterm_investments = 0, 
         current_lia = 0, noncurrent_lia = 0, 
         owners_equity = 0, net_income = 0, ebit = 0, 
-        total_rev = 0, sales_rev = 0, total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0  
+        total_rev = 0, sales_rev = 0, credit_sales_rev = 0,  total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0  
         ):
         
         # Intializing subclass attributes
@@ -189,7 +191,7 @@ class Hotel(Company):
         , intangible_assets, longterm_investments 
         , current_lia, noncurrent_lia 
         , owners_equity, net_income , ebit  
-        , total_rev, sales_rev , total_exp, operating_exp, interest_exp, depr_exp, wages_exp 
+        , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp 
         )
         
     # Other metrics methods
@@ -235,11 +237,8 @@ class Hotel(Company):
             return self.ave_daily_rate() * self.occ_rate()
         except ZeroDivisionError:
             return 0
-    '''
-    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
-    where different instances are concatnated, 
-    for now we just need to make sure a method is there that can produce a df for each instance 
-    '''
+
+    # Initiate a dataframe for instance, to be used for 
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
@@ -276,7 +275,7 @@ class Trade(Company):
         intangible_assets = 0, longterm_investments = 0, 
         current_lia = 0, noncurrent_lia = 0, 
         owners_equity = 0, net_income  = 0, ebit = 0, 
-        total_rev = 0, sales_rev  = 0, total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0  
+        total_rev = 0, sales_rev = 0, credit_sales_rev = 0,  total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0  
         ):
         
         # Intializing subclass attributes
@@ -291,7 +290,7 @@ class Trade(Company):
         , intangible_assets, longterm_investments 
         , current_lia, noncurrent_lia 
         , owners_equity, net_income , ebit  
-        , total_rev, sales_rev , total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
+        , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
 
     # Specific Financial Ratios methods
@@ -311,21 +310,17 @@ class Trade(Company):
         except ZeroDivisionError:
             return 0
         
-    '''
-    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
-    where different instances are concatnated, 
-    for now we just need to make sure a method is there that can produce a df for each instance 
-    '''
+    # Initiate a dataframe for instance, to be used for 
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
-                    self.date_record,
-                    self.inv_trnovr(), self.days_sales_inv_trnovr() # special methods
-                    # default methods
-                    , self.current_ratio(), self.quick_ratio(), self.cash_ratio() # liquidity ratios
-                    , self.total_debt_ratio(), self.dept_equity_ratio(), self.equity_multi(), self.tie(), self.cash_cov_ratio() # finacial leverage ratios
-                    , self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr() # turnover ratios 
-                    , self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios        ]
+            self.date_record,
+            self.inv_trnovr(), self.days_sales_inv_trnovr(), # special methods
+            # default methods
+            self.current_ratio(), self.quick_ratio(), self.cash_ratio(), # liquidity ratios
+            self.total_debt_ratio(), self.dept_equity_ratio(), self.equity_multi(), self.tie(), self.cash_cov_ratio(), # finacial leverage ratios
+            self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr(), # turnover ratios 
+            self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios        ]
         ]
         # Creating a list of column names
         columns = [
@@ -351,7 +346,7 @@ class Agriculture(Company):
         longterm_investments = 0, 
         current_lia = 0, noncurrent_lia = 0, 
         owners_equity = 0, net_income  = 0, ebit = 0, 
-        total_rev = 0, sales_rev = 0, total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0
+        total_rev = 0, sales_rev = 0, credit_sales_rev = 0,  total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0
         ):
         
         # Intializing subclass attributes
@@ -368,7 +363,7 @@ class Agriculture(Company):
         , longterm_investments 
         , current_lia, noncurrent_lia 
         , owners_equity, net_income , ebit  
-        , total_rev, sales_rev , total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
+        , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
         
     # Specific Financial Ratios methods
@@ -386,11 +381,7 @@ class Agriculture(Company):
         except ZeroDivisionError:
             return 0
         
-    '''
-    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
-    where different instances are concatnated, 
-    for now we just need to make sure a method is there that can produce a df for each instance 
-    '''
+    # initiate a dataframe for instance, to be used for 
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
@@ -427,7 +418,7 @@ class ServiceSector(Company):
         intangible_assets = 0, longterm_investments = 0, 
         current_lia = 0, noncurrent_lia = 0, 
         owners_equity = 0, net_income  = 0, ebit = 0, 
-        total_rev = 0, sales_rev  = 0, total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0
+        total_rev = 0, sales_rev = 0, credit_sales_rev = 0,  total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0
         ):
         
         # Intializing subclass attributes
@@ -443,14 +434,10 @@ class ServiceSector(Company):
         , intangible_assets, longterm_investments 
         , current_lia, noncurrent_lia 
         , owners_equity, net_income , ebit  
-        , total_rev, sales_rev , total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
+        , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
     
-    '''
-    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
-    where different instances are concatnated, 
-    for now we just need to make sure a method is there that can produce a df for each instance 
-    '''
+    # Specific Financial Ratios methods
     # profit margin per partner
     def profit_marg_partner(self):
         try:
@@ -500,7 +487,7 @@ class Manuf(Company):
         intangible_assets = 0, longterm_investments = 0, 
         current_lia = 0, noncurrent_lia = 0, 
         owners_equity = 0, net_income  = 0, ebit = 0, 
-        total_rev = 0, sales_rev  = 0, total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0  
+        total_rev = 0, sales_rev = 0, credit_sales_rev = 0,  total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0  
         ):
 
         # Initializing subclass attributes
@@ -516,7 +503,7 @@ class Manuf(Company):
         , intangible_assets, longterm_investments 
         , current_lia, noncurrent_lia 
         , owners_equity, net_income , ebit  
-        , total_rev, sales_rev , total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
+        , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
     
     # Specific Financial Ratios methods
@@ -539,11 +526,7 @@ class Manuf(Company):
         except ZeroDivisionError:
             return 0
     # Create DataFrame
-    '''
-    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
-    where different instances are concatnated, 
-    for now we just need to make sure a method is there that can produce a df for each instance 
-    '''
+    # initiate a dataframe for instance, to be used for 
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
@@ -580,7 +563,7 @@ class MiningForestry(Company):
         intangible_assets = 0, longterm_investments  = 0, 
         current_lia = 0, noncurrent_lia  = 0, 
         owners_equity = 0, net_income  = 0, ebit   = 0, 
-        total_rev = 0, sales_rev  = 0, total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0
+        total_rev = 0, sales_rev = 0, credit_sales_rev = 0,  total_exp = 0, operating_exp = 0, interest_exp = 0, depr_exp = 0, wages_exp = 0
         ):
         
         # initialize attributes from the base class within the subclasses
@@ -591,7 +574,7 @@ class MiningForestry(Company):
         , intangible_assets, longterm_investments 
         , current_lia, noncurrent_lia 
         , owners_equity, net_income , ebit  
-        , total_rev, sales_rev , total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
+        , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
         
         # Initializing subclass attributes
@@ -634,11 +617,7 @@ class MiningForestry(Company):
             return (self.ebit + self.depr_exp + self.depl_exp) / self.interest_exp
         except ZeroDivisionError:
             return 0
-    '''
-    Initiate a dataframe for instance, to be used in `multi_period_table()` in `functionsMod` 
-    where different instances are concatnated, 
-    for now we just need to make sure a method is there that can produce a df for each instance 
-    '''
+    # initiate a dataframe for instance to be used for adding functionality in functionsMod
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
