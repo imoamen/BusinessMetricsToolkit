@@ -267,7 +267,7 @@ def turnover_analysis(*in_objs):
         
         ratios_array = np.array([])
         for ratio in in_objs:
-                ratios_array = np.append(ratios_array, ratios_df.loc[str(ratio.date_record), 'Total Asset Turnover'])
+                ratios_array = np.append(ratios_array, ratios_df.loc[str(ratio.date_record), 'Total Assets Turnover'])
         
         inst_slope_array = np.array([])
         for i in range(len(ratios_array)-1):
@@ -292,7 +292,7 @@ def turnover_analysis(*in_objs):
             \n-----------------------------------------------------------------------------------------------
             \n*** Dignosis Related to time trend analysis of the company's Total Asset Turnover ***
             \nIdentified a pattern of increasing Total Asset Turnover!!!, 
-            \nAn Increasing ratio is generally a good indication as long as the company has a lot of old assets,
+            \nAn Increasing ratio is generally a good indication as long as the company doesn't have a lot of old assets,
             \nwhich means that the assets would be almost fully depreciated and might be very outdated. 
             \nIn this case, the book value of assets is low, contributing to a higher asset turnover. 
             \nPlus, the high turnover might mean that the company will need to make major capital outlays in the near future. 
