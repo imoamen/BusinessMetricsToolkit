@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # Creating main company
 class Company:
@@ -48,11 +49,26 @@ class Company:
     # Totals Methods
     # - Total assets calculation
     def total_assets(self):
-            return self.cash + self.account_receivables + self.inventory +self.noncurrent_assets + self.current_assets + self.intangible_assets + self.longterm_investments - self.accu_depr
+            return self.noncurrent_assets + self.current_assets 
         
     # - Total liabilities calculation
     def total_lia(self):  
         return self.current_lia + self.noncurrent_lia
+    
+    # Method to create a pie chart representing the capital structure of the company
+    def cap_struct(self):
+        
+        #Calculating Equity and liabilites ratios from the assets and appending them to a list of percentages to be used in plt.pie()
+        perc_lst = [float(self.total_lia() / self.total_assets()), float(self.owners_equity / self.total_assets())]
+        # list of percentages names to be used in `labels`, in plt.pie()
+        perc_names_lst = ['Liabilities', 'Equity']
+
+        plt.style.use(['seaborn-v0_8'])
+        plt.figure(figsize=(8,8))
+        plt.pie(perc_lst, explode=(0,0.025), labels=perc_names_lst, autopct='%1.1f%%' ) # `autopct` displays percentages on the chart wedges
+        plt.title("Company's Capital Structure")
+        plt.show()
+
 
     # Financial Ratios methods
     # all methods return method that are inhreited by subclasses
@@ -168,7 +184,7 @@ class Company:
 #Hotel subclass
 class Hotel(Company):
     def __init__(
-        self, date_record, room_num_aval, room_rev = 0, room_num_occ = 0, room_num_sold = 0, 
+        self, date_record, room_num_aval = 0, room_rev = 0, room_num_occ = 0, room_num_sold = 0, 
         cash = 0, account_receivables = 0, inventory = 0, current_assets = 0, 
         noncurrent_assets = 0, accu_depr  = 0, 
         intangible_assets = 0, longterm_investments = 0, 
@@ -193,7 +209,17 @@ class Hotel(Company):
         , owners_equity, net_income , ebit  
         , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp 
         )
-        
+    
+    def entries(self):
+        print(f'''
+            Your entries:
+            date_record ={self.date_record}\ncash = {self.cash}, account_receivables = {self.account_receivables}, inventory = {self.inventory}, current_assets = {self.current_assets}\n
+            noncurrent_assets = {self.noncurrent_assets}, accu_depr = {self.accu_depr}, intangible_assets = {self.intangible_assets}, longterm_investments = {self.longterm_investments}\n
+            current_lia = {self.current_lia}, noncurrent_lia = {self.noncurrent_lia}, owners_equity = {self.owners_equity}, net_income = {self.net_income}, ebit = {self.ebit}\n
+            total_rev = {self.total_rev}, sales_rev = {self.sales_rev}, credit_sales_rev = {self.credit_sales_rev}, total_exp = {self.total_exp}, operating_exp = {self.operating_exp}\n
+            interest_exp = {self.interest_exp}, depr_exp = {self.depr_exp}, wages_exp = {self.wages_exp}\n
+            room_num_aval = {self.room_num_aval}, room_rev = {self.room_rev}, room_num_occ = {self.room_num_occ}, room_num_sold = {self.room_num_sold}                                                             
+            ''')    
     # Other metrics methods
     # - gross operation profit calculation 
     def GOP(self):
@@ -293,6 +319,16 @@ class Trade(Company):
         , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
 
+    def entries(self):
+        print(f'''
+            Your entries:
+            date_record ={self.date_record}\ncash = {self.cash}, account_receivables = {self.account_receivables}, inventory = {self.inventory}, current_assets = {self.current_assets}\n
+            noncurrent_assets = {self.noncurrent_assets}, accu_depr = {self.accu_depr}, intangible_assets = {self.intangible_assets}, longterm_investments = {self.longterm_investments}\n
+            current_lia = {self.current_lia}, noncurrent_lia = {self.noncurrent_lia}, owners_equity = {self.owners_equity}, net_income = {self.net_income}, ebit = {self.ebit}\n
+            total_rev = {self.total_rev}, sales_rev = {self.sales_rev}, credit_sales_rev = {self.credit_sales_rev}, total_exp = {self.total_exp}, operating_exp = {self.operating_exp}\n
+            interest_exp = {self.interest_exp}, depr_exp = {self.depr_exp}, wages_exp = {self.wages_exp}\n                                                              
+            cogs = {self.cogs}, ave_inv = {self.ave_inv}
+            ''')
     # Specific Financial Ratios methods
     # Inventory turnover 
     def inv_trnovr(self):
@@ -365,7 +401,16 @@ class Agriculture(Company):
         , owners_equity, net_income , ebit  
         , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
-        
+    def entries(self):
+        print(f'''
+            Your entries:
+            date_record ={self.date_record}\ncash = {self.cash}, account_receivables = {self.account_receivables}, inventory = {self.inventory}, current_assets = {self.current_assets}\n
+            noncurrent_assets = {self.noncurrent_assets}, accu_depr = {self.accu_depr}, intangible_assets = {self.intangible_assets}, longterm_investments = {self.longterm_investments}\n
+            current_lia = {self.current_lia}, noncurrent_lia = {self.noncurrent_lia}, owners_equity = {self.owners_equity}, net_income = {self.net_income}, ebit = {self.ebit}\n
+            total_rev = {self.total_rev}, sales_rev = {self.sales_rev}, credit_sales_rev = {self.credit_sales_rev}, total_exp = {self.total_exp}, operating_exp = {self.operating_exp}\n
+            interest_exp = {self.interest_exp}, depr_exp = {self.depr_exp}, wages_exp = {self.wages_exp}\n                                                              
+            total_farm_area = {self.total_farm_area}, total_farm_rev = {self.total_farm_rev}, total_num_stock = {self.total_num_stock}, total_stock_rev = {self.total_stock_rev}
+            ''')    
     # Specific Financial Ratios methods
     # yield per unit of area
     def land_yield(self):
@@ -436,7 +481,16 @@ class ServiceSector(Company):
         , owners_equity, net_income , ebit  
         , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
-    
+    def entries(self):
+        print(f'''
+            Your entries:
+            date_record ={self.date_record}\ncash = {self.cash}, account_receivables = {self.account_receivables}, inventory = {self.inventory}, current_assets = {self.current_assets}\n
+            noncurrent_assets = {self.noncurrent_assets}, accu_depr = {self.accu_depr}, intangible_assets = {self.intangible_assets}, longterm_investments = {self.longterm_investments}\n
+            current_lia = {self.current_lia}, noncurrent_lia = {self.noncurrent_lia}, owners_equity = {self.owners_equity}, net_income = {self.net_income}, ebit = {self.ebit}\n
+            total_rev = {self.total_rev}, sales_rev = {self.sales_rev}, credit_sales_rev = {self.credit_sales_rev}, total_exp = {self.total_exp}, operating_exp = {self.operating_exp}\n
+            interest_exp = {self.interest_exp}, depr_exp = {self.depr_exp}, wages_exp = {self.wages_exp}\n        
+            total_fee_rev = {self.total_fee_rev}, equity_partner_num = {self.equity_partner_num}, consultant_num = {self.consultant_num}                                                    
+            ''')
     # Specific Financial Ratios methods
     # profit margin per partner
     def profit_marg_partner(self):
@@ -505,6 +559,16 @@ class Manuf(Company):
         , owners_equity, net_income , ebit  
         , total_rev, sales_rev , credit_sales_rev, total_exp, operating_exp, interest_exp, depr_exp, wages_exp  
         )
+    def entries(self):
+        print(f'''
+            Your entries:
+            date_record ={self.date_record}\ncash = {self.cash}, account_receivables = {self.account_receivables}, inventory = {self.inventory}, current_assets = {self.current_assets}\n
+            noncurrent_assets = {self.noncurrent_assets}, accu_depr = {self.accu_depr}, intangible_assets = {self.intangible_assets}, longterm_investments = {self.longterm_investments}\n
+            current_lia = {self.current_lia}, noncurrent_lia = {self.noncurrent_lia}, owners_equity = {self.owners_equity}, net_income = {self.net_income}, ebit = {self.ebit}\n
+            total_rev = {self.total_rev}, sales_rev = {self.sales_rev}, credit_sales_rev = {self.credit_sales_rev}, total_exp = {self.total_exp}, operating_exp = {self.operating_exp}\n
+            interest_exp = {self.interest_exp}, depr_exp = {self.depr_exp}, wages_exp = {self.wages_exp}\n                                                              
+            mtrils_cost = {self.manuf_cost}, cogs = {self.cogs}, manuf_cost = {self.manuf_cost}
+            ''')   
     
     # Specific Financial Ratios methods
     # Inventory turnover
@@ -557,7 +621,7 @@ class Manuf(Company):
 class MiningForestry(Company):
     def __init__(
         self, date_record,
-        accu_depl = 0, depl_exp = 0, 
+        depl_exp = 0, 
         cash = 0, account_receivables = 0, inventory = 0, current_assets  = 0, 
         noncurrent_assets  = 0, accu_depr  = 0, 
         intangible_assets = 0, longterm_investments  = 0, 
@@ -578,39 +642,19 @@ class MiningForestry(Company):
         )
         
         # Initializing subclass attributes
-        self.accu_depl = accu_depl
         self.depl_exp = depl_exp
-        
-    # Total assets after accumulated depletion
-    def total_assets(self):
-        return self.cash + self.account_receivables + self.inventory +self.noncurrent_assets + self.current_assets + self.intangible_assets + self.longterm_investments - self.accu_depr - self.accu_depl
     
-    # Ignored inherited methods that included `total_assets()` due to change in the calculation of assets (subtracting accumulated depletion)
+    def entries(self):
+        print(f'''
+            Your entries:
+            date_record ={self.date_record}\ncash = {self.cash}, account_receivables = {self.account_receivables}, inventory = {self.inventory}, current_assets = {self.current_assets}\n
+            noncurrent_assets = {self.noncurrent_assets}, accu_depr = {self.accu_depr}, intangible_assets = {self.intangible_assets}, longterm_investments = {self.longterm_investments}\n
+            current_lia = {self.current_lia}, noncurrent_lia = {self.noncurrent_lia}, owners_equity = {self.owners_equity}, net_income = {self.net_income}, ebit = {self.ebit}\n
+            total_rev = {self.total_rev}, sales_rev = {self.sales_rev}, credit_sales_rev = {self.credit_sales_rev}, total_exp = {self.total_exp}, operating_exp = {self.operating_exp}\n
+            interest_exp = {self.interest_exp}, depr_exp = {self.depr_exp}, wages_exp = {self.wages_exp}\n                                                              
+            ''')   
+    
     # ignored inherited method `cash_cov_ratio` due to adding depl exp
-    # -- Total dept ratio
-    def total_debt_ratio(self):
-        try:
-            return (self.total_assets() - self.owners_equity) / self.total_assets()
-        except ZeroDivisionError:
-            return 0
-    # -- Equity Multiplier
-    def equity_multi(self):
-        try:
-            return self.total_assets() / self.owners_equity
-        except ZeroDivisionError:
-            return 0
-    #  -- Total asset turnover
-    def total_asset_trnovr(self):
-        try:
-            return self.sales_rev / self.total_assets()
-        except ZeroDivisionError:
-            return 0
-    # -- Return on assets
-    def return_assets(self):
-        try:
-            return self.net_income / self.total_assets()
-        except ZeroDivisionError:
-            return 0
     # -- Cash Coverage Ratios
     def cash_cov_ratio(self):
         try:
@@ -621,19 +665,20 @@ class MiningForestry(Company):
     def create_df(self):
         # Gathering data in single list
         list_ratios = [
-            self.date_record,
-            # adjusted financial leverage ratios
-            self.total_debt_ratio(), self.equity_multi(), self.total_asset_trnovr(), self.return_assets(), self.cash_cov_ratio(),
-            # inherited methods from base class
+            self.date_record, 
+            self.cash_cov_ratio(), #adjusted ratio
+            # default methods
             self.current_ratio(), self.quick_ratio(), self.cash_ratio(), # liquidity ratios
-            self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr(), # turnover ratios
-            self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios]
+            self.total_debt_ratio(), self.dept_equity_ratio(), self.equity_multi(), self.tie(), # financial leverage ratios
+            self.rece_trnovr(), self.days_sales_rece_trnover(), self.total_asset_trnovr(), # turnover ratios 
+            self.profit_marg(), self.return_assets(), self.return_equity(), self.wages_rev_ratio() # profitability ratios
         ]
         # Creating a list of column names
         columns = [
             'Period'
-            , 'Total Debt Ratio', 'Equity Multiplier', 'Total Assets Turnover', 'Return on Assets', 'Cash Coverage' # adjusted financial leverage ratios
+            , 'Cash Coverage' #adjusted ratio
             , 'Current Ratio', 'Quick Ratio', 'Cash Ratio' # liquidity ratios
+            , 'Total Debt Ratio', 'Debt to Equity Ratio', 'Equity Multiplier', 'Times Interest Earned' # financial leverage ratios
             , 'Receivables Turnover', 'Days Sales Receivables Turnover', 'Total Assets Turnover' # turnover ratios
             , 'Profit Margin', 'Return on Assets', 'Return on Equity', 'Payroll(wages) to Revenue Ratio' # profitability ratios
         ]  
@@ -641,4 +686,4 @@ class MiningForestry(Company):
         df = pd.DataFrame([list_ratios], columns=columns)
         # Setting Period date as index
         df.set_index('Period', inplace=True)
-        return df
+        return df   
