@@ -1,0 +1,1 @@
+### Simplified accounting system that takes you all the way from journal entries --> the balance sheet
