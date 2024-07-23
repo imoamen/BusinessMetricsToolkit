@@ -1,6 +1,6 @@
 import pandas as pd
 
-import partnership.root as root
+import partnership.root_account as root
 
 class IncomeStatement:
     

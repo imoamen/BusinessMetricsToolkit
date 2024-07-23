@@ -1,6 +1,6 @@
 import pandas as pd
 
-from partnership.root import Account
+from partnership.root_account import Account
 
 class Expense(Account):
     def __init__(self, pr:int, name:str):

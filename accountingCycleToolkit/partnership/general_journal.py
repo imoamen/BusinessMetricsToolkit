@@ -1,7 +1,7 @@
 import pandas as pd
 import random
 
-import partnership.root as root
+import partnership.root_account as root
 
 class Journaling:
     general_journal = pd.DataFrame(columns=['id', 'date', 'account_name', 'pr', 'dr', 'cr'])
